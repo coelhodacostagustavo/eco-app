@@ -578,6 +578,7 @@ function mostrarTela(tela) {
   ];
 
   esconderTodas(telas);
+  window.scrollTo(0, 0);
   if (tela) tela.style.display = "block";
 
   if (tela === $("home-screen")) renderizarItens();
