@@ -2764,52 +2764,59 @@ document.addEventListener("DOMContentLoaded", function () {
       mostrarTela($("login-screen"));
     };
 
-  //Form de registro
-  const regForm = $("register-form");
-  if (regForm) {
-    regForm.onsubmit = function (e) {
-      e.preventDefault();
-      const email = $("reg-email").value;
+  //Form de registro 
+const regForm = $("register-form");
+if (regForm) {
+  regForm.onsubmit = function (e) {
+    e.preventDefault();
+    const email = $("reg-email").value;
 
-      if (usuarios.find((u) => u.username === email)) {
-        mostrarToast("Email já cadastrado.", "warning");
-        return;
-      }
+    if (usuarios.find((u) => u.username === email)) {
+      mostrarToast("Email já cadastrado.", "warning");
+      return;
+    }
 
-      const enderecoCompleto = $("reg-endereco").value;
+    const enderecoCompleto = $("reg-endereco").value;
 
-      usuarios.push({
-        username: email,
-        senha: $("reg-senha").value,
-        nome: $("reg-nome").value,
-        sobrenome: $("reg-sobrenome").value,
-        email,
-        telefone: $("reg-telefone").value,
-        endereco: enderecoCompleto,
-        imagem: "https://via.placeholder.com/150",
-        reputacao: "N/A",
-        avaliacoesRecebidas: [],
-        avaliacoesPendentes: [],
-        pontosEco: 0,
-        cupons: [],
-      });
+    usuarios.push({
+      username: email,
+      senha: $("reg-senha").value,
+      nome: $("reg-nome").value,
+      sobrenome: $("reg-sobrenome").value,
+      email,
+      telefone: $("reg-telefone").value,
+      endereco: enderecoCompleto,
+      imagem: "https://via.placeholder.com/150",
+      reputacao: "N/A",
+      avaliacoesRecebidas: [],
+      avaliacoesPendentes: [],
+      pontosEco: 0,
+      cupons: [],
+    });
 
-      salvarDadosCompletos();
-      mostrarToast("Cadastro realizado com sucesso! Faça login.", "success");
-      mostrarTela($("login-screen"));
-    };
-  }
+    salvarDadosCompletos();
+    regForm.reset();
+    mostrarToast("Cadastro realizado com sucesso! Faça login.", "success");
+    mostrarTela($("login-screen"));
+  };
+}
+
 
   //Botão logout
-  const logoutB = $("logout-btn");
-  if (logoutB) {
-    logoutB.onclick = () => {
-      usuarioLogado = null;
-      localStorage.removeItem("eco_usuarioLogado");
-      renderizarLogin();
-      mostrarToast("Logout realizado com sucesso!", "info");
-    };
-  }
+const logoutB = $("logout-btn");
+if (logoutB) {
+  logoutB.onclick = () => {
+    usuarioLogado = null;
+    localStorage.removeItem("eco_usuarioLogado");
+
+    // Limpar campos de login
+    $("login-username").value = "";
+    $("login-password").value = "";
+
+    renderizarLogin();
+    mostrarToast("Logout realizado com sucesso!", "info");
+  };
+}
 
   //Botão perfil
   const perfilB = $("perfil-btn");
