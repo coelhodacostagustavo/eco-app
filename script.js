@@ -2776,9 +2776,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const enderecoCompleto = enderecoRua
-        ? `${enderecoRua}, ${cidade}`
-        : cidade;
+      const enderecoCompleto = $("reg-endereco").value;
 
       usuarios.push({
         username: email,
