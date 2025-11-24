@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCity - Plataforma Sustentável de Trocas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Container principal-->
+    <div class="container main-container" id="app-container">
+        <div id="login-screen" class="screen">
+            <h1 class="text-center text-success mb-5">
+                <img src="img/Logo EcoCity.png" style="max-width:120px; height:auto;" alt="Logo EcoCity">
+            </h1>
+            <!--Tela de login-->
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card p-5 shadow-lg">
+                        <h3 class="card-title text-center mb-4">Bem-vindo de volta!</h3>
+                        <form id="login-form">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Email</label>
+                                <input type="email" class="form-control" id="login-username" placeholder="seu@email.com"
+                                    required autocomplete="email">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Senha</label>
+                                <input type="password" class="form-control" id="login-password"
+                                    placeholder="Digite sua senha" required autocomplete="current-password">
+                            </div>
+                            <button type="submit" class="btn btn-success w-100 btn-lg">Entrar</button>
+                        </form>
+                        <p class="mt-4 text-center">Não tem conta? <a href="#" id="to-register">Cadastre-se
+                                gratuitamente</a></p>
+                        <p class="text-center mb-0"><a href="#" id="forgot-password-link"
+                                class="text-muted small">Esqueceu a senha?</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Cadastro-->
+        <div id="register-screen" class="screen">
+            <h1 class="text-center text-success mb-5"><i class="bi bi-leaf"></i> EcoCity</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card p-5 shadow-lg">
+                        <h3 class="card-title text-center mb-4">Crie sua conta</h3>
+                        <form id="register-form">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Nome</label>
+                                    <input type="text" class="form-control" id="reg-nome" placeholder="Nome" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Sobrenome</label>
+                                    <input type="text" class="form-control" id="reg-sobrenome" placeholder="Sobrenome"
+                                        required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Email</label>
+                                    <input type="email" class="form-control" id="reg-email" placeholder="seu@email.com"
+                                        required autocomplete="email">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Telefone</label>
+                                    <input type="tel" class="form-control" id="reg-telefone"
+                                        placeholder="(00) 00000-0000">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Senha</label>
+                                    <input type="password" class="form-control" id="reg-senha"
+                                        placeholder="Mínimo 6 caracteres" required minlength="6"
+                                        autocomplete="new-password">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Cidade <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="reg-cidade" required>
+                                        <option value="">Selecione sua cidade...</option>
+                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                        <option value="Niterói">Niterói</option>
+                                        <option value="São Gonçalo">São Gonçalo</option>
+                                        <option value="Duque de Caxias">Duque de Caxias</option>
+                                        <option value="Nova Iguaçu">Nova Iguaçu</option>
+                                        <option value="Maricá">Maricá</option>
+                                        <option value="Itaboraí">Itaboraí</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Endereço (Rua, Número)</label>
+                                    <input type="text" class="form-control" id="reg-endereco"
+                                        placeholder="Ex: Rua A, 100" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100 btn-lg mt-4">Cadastrar</button>
+                        </form>
+                        <p class="mt-4 text-center">Já tem conta? <a href="#" id="to-login">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Home (página principal)-->
+    <div id="home-screen" style="display:none;">
+        <nav class="navbar navbar-light bg-white sticky-top shadow-sm mb-4">
+            <div class="container d-flex align-items-center">
+
+                <a class="navbar-brand d-none d-lg-block" href="#">
+                    <img src="img/Logo EcoCity.png" style="max-width: 100px; height: auto;" alt="Logo EcoCity">
+                </a>
+
+                <div class="flex-grow-1 mx-3">
+                    <input type="text" placeholder="Pesquisar..." class="form-control" id="filter-text">
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <div id="user-info-nav" class="d-none d-sm-flex align-items-center gap-2 me-2">
+                        <img id="nav-profile-img" src="https://via.placeholder.com/35"
+                            class="rounded-circle profile-img-nav" alt="Foto de Perfil">
+                        <span id="nav-username" class="fw-bold text-dark small">Olá!</span>
+                    </div>
+
+                    <button class="btn btn-success btn-sm btn-anunciar" id="add-item-btn" title="Anunciar novo item"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom"><i
+                            class="bi bi-plus-circle-fill"></i></button>
+                    <button class="btn btn-info text-white btn-sm d-none d-md-inline" id="open-notif-config-btn"
+                        data-bs-toggle="modal" data-bs-target="#notif-config-modal" title="Configurar alertas"><i
+                            class="bi bi-exclamation-triangle-fill"></i></button>
+                    <button class="btn btn-warning position-relative btn-sm" id="notif-btn" data-bs-toggle="modal"
+                        data-bs-target="#notificacoes-modal" title="Notificações">
+                        <i class="bi bi-bell-fill"></i> <span id="notif-counter"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                            style="display:none;">0</span>
+                    </button>
+                    <button class="btn btn-outline-primary btn-sm position-relative" id="negociacoes-btn"
+                        data-bs-toggle="modal" data-bs-target="#negociacoes-modal" title="Negociações">
+                        🤝 <span id="negociacoes-counter"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                            style="display:none;">0</span>
+                    </button>
+                    <button class="btn btn-outline-info btn-sm" id="conversas-btn" title="Conversas"><i
+                            class="bi bi-chat-dots-fill"></i></button>
+                    <button class="btn btn-primary btn-sm d-none d-md-inline" id="perfil-btn"
+                        title="Meu perfil">Perfil</button>
+                    <button class="btn btn-danger btn-sm" id="logout-btn" title="Sair">Sair</button>
+                </div>
+            </div>
+        </nav>
+        <!--Filtros de buscas-->
+        <div class="container">
+            <div class="row justify-content-center mb-4">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-3">
+                            <h5 class="mb-3"><i class="bi bi-funnel-fill"></i> Filtros de Busca</h5>
+                            <div class="row g-2">
+                                <div class="col-lg-2 col-md-4 col-6"><select id="filter-category"
+                                        class="form-select form-select-sm">
+                                        <option value="Todas">Todas Categorias</option>
+                                    </select></div>
+                                <div class="col-lg-2 col-md-4 col-6"><select id="filter-local"
+                                        class="form-select form-select-sm">
+                                        <option value="Todas">Todas Localidades</option>
+                                    </select></div>
+                                <div class="col-lg-2 col-md-4 col-6"><select id="filter-reputacao"
+                                        class="form-select form-select-sm">
+                                        <option value="0">Reputação (Todas)</option>
+                                        <option value="1">1.0+</option>
+                                        <option value="2">2.0+</option>
+                                        <option value="3">3.0+</option>
+                                        <option value="4">4.0+</option>
+                                        <option value="5">5.0</option>
+                                    </select></div>
+                                <div class="col-lg-2 col-md-4 col-6">
+                                    <select id="filter-status" class="form-select form-select-sm">
+                                        <option value="todos">Todos Status</option>
+                                        <option value="meus_anuncios">Meus Anúncios</option>
+                                        <option value="ativo">Ativo</option>
+                                        <option value="aguardando">Aguardando</option>
+                                        <option value="concluído">Concluído</option>
+                                        <option value="cancelado">Cancelado</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-6"><select id="filter-anuncio"
+                                        class="form-select form-select-sm">
+                                        <option value="recentes">Mais Recentes</option>
+                                        <option value="24h">Últimas 24 horas</option>
+                                        <option value="7d">Últimos 7 dias</option>
+                                        <option value="15d">Últimos 15 dias</option>
+                                        <option value="30d">Últimos 30 dias</option>
+                                        <option value="antigos">Mais Antigos</option>
+                                    </select></div>
+                                <div class="col-lg-2 col-md-4 col-6">
+                                    <select id="filter-raio" class="form-select form-select-sm">
+                                        <option value="0">Todas Distâncias</option>
+                                        <option value="5">Até 5 km</option>
+                                        <option value="10">Até 10 km</option>
+                                        <option value="25">Até 25 km</option>
+                                        <option value="50">Até 50 km</option>
+                                        <option value="100">Até 100 km</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 d-flex justify-content-center gap-2 mt-2">
+                                    <button class="btn btn-secondary btn-sm" id="filter-favoritos"
+                                        style="min-width:120px;"><i class="bi bi-star-fill"></i> Favoritos</button>
+                                    <button class="btn btn-secondary btn-sm" id="clear-filter"
+                                        style="min-width:120px;">Limpar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="mb-3 text-muted">Itens Disponíveis</h4>
+            <div id="itens-container" class="row g-3"></div>
+        </div>
+    </div>
+    <!--Adicionar item (anunciar novo item)-->
+    <div id="add-item-screen" class="full-screen-container" style="display:none;">
+        <div class="container py-4">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="text-success mb-0"><i class="bi bi-plus-circle-fill"></i> Anunciar Novo Item</h2>
+                        <button class="btn btn-secondary" id="voltar-home-cadastro">Voltar</button>
+                    </div>
+
+                    <form id="add-item-form" class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Nome do item:</label>
+                            <input type="text" class="form-control" placeholder="Ex: Mesa, Livros, Cadeira"
+                                id="item-nome" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Quantidade:</label>
+                            <input type="number" class="form-control" placeholder="1, 2, 10..." id="item-quantidade"
+                                min="1" value="1" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Descrição detalhada:</label>
+                            <textarea class="form-control" rows="3" placeholder="Condição, cor, tamanho, etc."
+                                id="item-descricao" required></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Localidade:</label>
+                            <select class="form-select" id="item-local" required></select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Categoria:</label>
+                            <select class="form-select" id="item-categoria" required></select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Duração:</label>
+                            <select class="form-select" id="item-tempo" required>
+                                <option value="24">24 horas</option>
+                                <option value="168">7 dias</option>
+                                <option value="360">15 dias</option>
+                                <option value="720">30 dias</option>
+                                <option value="0.0083">30 segundos (Teste)</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Imagens do Item (Máx: 5):</label>
+                            <input type="file" class="form-control" id="item-imagens" accept="image/*" multiple
+                                required>
+                            <small class="text-muted">Você pode selecionar até 5 imagens</small>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-success btn-lg w-100" type="submit">Adicionar Item</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Perfil do usuário-->
+    <div id="perfil-screen" style="display:none;">
+        <div class="container mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="text-success"><i class="bi bi-person-circle"></i> Meu Perfil</h2>
+                <button class="btn btn-secondary" id="voltar-home">Voltar</button>
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 text-center">
+                            <img id="perfil-imagem" src="https://via.placeholder.com/150"
+                                class="rounded-circle profile-picture mb-3" alt="Foto de Perfil"
+                                style="width:150px;height:150px;object-fit:cover;">
+                            <input type="file" id="perfil-upload" class="form-control mb-2" accept="image/*">
+                            <button class="btn btn-success btn-sm w-100" id="perfil-atualizar-foto">Atualizar
+                                Foto</button>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="mb-3">
+                                <span id="perfil-reputacao-info" class="badge bg-warning text-dark fs-6 me-2">Reputação:
+                                    N/A</span>
+                                <span id="perfil-pontos-eco" class="badge bg-success fs-6">Eco Pontos: 0 🌿</span>
+                            </div>
+                            <form id="perfil-form">
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <label class="fw-bold">Nome</label>
+                                        <input type="text" id="perfil-nome-input" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="fw-bold">Sobrenome</label>
+                                        <input type="text" id="perfil-sobrenome-input" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="fw-bold">Email (Usuário)</label>
+                                        <input type="email" id="perfil-email-input" class="form-control" disabled>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="fw-bold">Telefone</label>
+                                        <input type="tel" id="perfil-telefone-input" class="form-control">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="fw-bold">Endereço</label>
+                                        <input type="text" id="perfil-endereco-input" class="form-control">
+                                    </div>
+                                </div>
+                                <button class="btn btn-success mt-3" type="submit">Atualizar Perfil</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Opções do Perfil-->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-shield-lock"></i> Alterar Senha</h5>
+                            <p class="text-muted small">Mantenha sua conta segura</p>
+                            <button class="btn btn-primary btn-sm" id="btn-mudar-senha">Alterar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-ticket-perforated"></i> Meus Cupons</h5>
+                            <p class="text-muted small">Troque pontos por cupons</p>
+                            <button class="btn btn-warning btn-sm" id="btn-ver-cupons">Ver Cupons</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><i class="bi bi-trash-fill"></i> Deletar Conta</h5>
+                            <p class="text-muted small">Ação permanente</p>
+                            <button class="btn btn-danger btn-sm" id="btn-deletar-conta">Deletar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Avaliação de outros usuários-->
+            <div class="card shadow">
+                <div class="card-body">
+                    <ul id="perfil-avaliacoes-pendentes" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Detalhes do Item-->
+    <div class="modal fade" tabindex="-1" id="detalhes-item-modal">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">📦 Detalhes do Item</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="detalhesCarousel" class="carousel slide mb-3" data-bs-ride="false">
+                        <div class="carousel-indicators" id="detalhes-carousel-indicators"></div>
+                        <div class="carousel-inner" id="detalhes-carousel-inner"></div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#detalhesCarousel"
+                            data-bs-slide="prev" aria-label="Anterior">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#detalhesCarousel"
+                            data-bs-slide="next" aria-label="Próximo">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="text-center mb-3">
+                        <span id="contador-fotos" class="badge bg-dark fs-6">1/1</span>
+                    </div>
+
+                    <h4 id="detalhes-item-nome" class="text-success"></h4>
+                    <p><strong>Categoria:</strong> <span id="detalhes-item-categoria"></span></p>
+                    <p><strong>Descrição:</strong> <span id="detalhes-item-descricao"></span></p>
+                    <p><strong>Quantidade:</strong> <span id="detalhes-item-quantidade"></span></p>
+                    <p><strong>Localidade:</strong> <span id="detalhes-item-local"></span></p>
+                    <p><strong>Anunciante:</strong> <span id="detalhes-item-anunciante"></span></p>
+                    <p><strong>Reputação:</strong> <span id="detalhes-item-reputacao"></span></p>
+
+                    <div id="detalhes-botoes-acao" class="d-flex gap-2 mb-3"></div>
+
+                    <hr>
+                    <h5 class="text-success mb-3"><i class="bi bi-chat-left-text"></i> Perguntas sobre este item</h5>
+                    <div id="lista-perguntas" class="mb-3" style="max-height:300px;overflow-y:auto;"></div>
+                    <div class="input-group">
+                        <input type="text" id="input-pergunta" class="form-control"
+                            placeholder="Faça uma pergunta ao vendedor...">
+                        <button class="btn btn-success" type="button" id="btn-enviar-pergunta">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Editar Item anunciado-->
+    <div class="modal fade" tabindex="-1" id="modal-editar-item">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">✏️ Editar Anúncio</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <form id="form-editar-item">
+                    <div class="modal-body">
+                        <input type="hidden" id="editar-item-id">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nome do Item</label>
+                            <input type="text" class="form-control" id="editar-item-nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Descrição</label>
+                            <textarea class="form-control" id="editar-item-descricao" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Adicionar Mais Fotos (Máx: 5 total)</label>
+                            <input type="file" class="form-control" id="editar-item-novas-imagens" accept="image/*"
+                                multiple>
+                            <small class="text-muted">Fotos atuais serão mantidas</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Fotos Atuais:</label>
+                            <div id="grid-imagens-atuais" class="row g-2"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Preferências dos alertas de categorias e localidades-->
+    <div class="modal fade" tabindex="-1" id="notif-config-modal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="bi bi-exclamation-triangle-fill"></i> Configurar Alertas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted">Receba alertas quando novos itens forem anunciados:</p>
+                    <div class="row g-2">
+                        <div class="col-6"><select class="form-select" id="notif-categoria">
+                                <option value="">Categoria</option>
+                            </select></div>
+                        <div class="col-6"><select class="form-select" id="notif-local">
+                                <option value="">Localidade</option>
+                            </select></div>
+                        <div class="col-12"><button class="btn btn-primary w-100" type="button"
+                                id="notif-ativar">Ativar</button>
+                        </div>
+                    </div>
+                    <div id="notificacoes-container" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Dar Lance em anúncio-->
+    <div class="modal fade" tabindex="-1" id="lance-modal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title"><i class="bi bi-gavel"></i> Dar Lance</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="lance-item-nome" class="fw-bold"></p>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Tipo de Lance:</label>
+                        <select id="tipo-lance-select" class="form-select">
+                            <option value="pago">Pago R$ pelo(s) item(s) e retiro no endereço</option>
+                            <option value="gratuito">Retiro grátis no local</option>
+                            <option value="cobro">Cobro R$ para retirar e dar destino apropriado</option>
+                        </select>
+                    </div>
+                    <div class="mb-3" id="lance-valor-container">
+                        <label class="form-label fw-bold">Valor (R$):</label>
+                        <input type="number" id="valor-lance-input" class="form-control" placeholder="0.00" step="0.01"
+                            min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Quantidade:</label>
+                        <input type="number" id="quantidade-lance-input" class="form-control" min="1" value="1">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold"><i class="bi bi-leaf"></i> Transporte Ecológico
+                            (Opcional):</label>
+                        <select id="lance-transporte-eco" class="form-select">
+                            <option value="">Selecione...</option>
+                            <option value="bicicleta">🚴 Bicicleta (+50 EcoPontos)</option>
+                            <option value="caminhada">🚶 Caminhada (+40 EcoPontos)</option>
+                            <option value="transporte_publico">🚌 Transporte Público (+30 EcoPontos)</option>
+                            <option value="carona_solidaria">🚗 Carona Solidária (+25 EcoPontos)</option>
+                        </select>
+                        <small class="text-muted">Ganhe pontos eco usando transporte sustentável!</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="button" id="confirmar-lance-btn">Confirmar</button>
+                    <button class="btn btn-danger" type="button" id="remover-lance-btn">Remover Lance</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Lances recebidos-->
+    <div class="modal fade" tabindex="-1" id="lances-anunciante-modal">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Lances para: <span id="lances-anunciante-item-nome"></span></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <button id="recusar-tudo-btn" class="btn btn-danger btn-sm mb-3 w-100" type="button"
+                        style="display:none;">❌ Marcar como Sem Acordo</button>
+                    <ul id="lances-anunciante-list" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Notificações-->
+    <div class="modal fade" tabindex="-1" id="notificacoes-modal">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title"><i class="bi bi-bell-fill"></i> Notificações</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="notificacoes-vazio-msg" class="text-muted text-center">Nenhuma notificação.</p>
+                    <ul id="notificacoes-list" class="list-group"></ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-sm" type="button" id="limpar-notif-btn">
+                        Limpar Todas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Negociações concluídas-->
+    <div class="modal fade" tabindex="-1" id="negociacoes-modal">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">🤝 Histórico de Negociações</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="negociacoes-list" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Conversas com outros usuários-->
+    <div class="modal fade" tabindex="-1" id="conversas-modal">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="bi bi-chat-dots-fill"></i> Conversas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="conversas-list" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Chat individual-->
+    <div class="modal fade" tabindex="-1" id="chat-modal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title"><i class="bi bi-chat-dots-fill"></i> <span id="chat-item-nome"></span></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="chat-mensagens"
+                        style="height:300px;overflow-y:auto;border:1px solid #ddd;padding:10px;border-radius:5px;background:#f8f9fa;">
+                    </div>
+                    <div class="input-group mt-2">
+                        <input type="text" id="chat-mensagem-input" class="form-control"
+                            placeholder="Digite sua mensagem...">
+                        <button class="btn btn-success" type="button" id="chat-enviar-btn">
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Avaliação com estrelas-->
+    <div class="modal fade" tabindex="-1" id="avaliacao-modal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title"><i class="bi bi-star-fill"></i> Avaliar Transação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <form id="avaliacao-form">
+                    <div class="modal-body">
+                        <p>Avalie <strong><span id="avaliacao-nome-usuario"></span></strong> pela transação do item
+                            <strong><span id="avaliacao-nome-item"></span></strong>.
+                        </p>
+                        <input type="hidden" id="avaliacao-avaliado-username">
+                        <input type="hidden" id="avaliacao-item-id">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold d-block">Avaliação:</label>
+                            <div class="sistema-estrelas" id="container-estrelas">
+                                <span class="estrela" data-valor="1"><i class="bi bi-star-fill"></i></span>
+                                <span class="estrela" data-valor="2"><i class="bi bi-star-fill"></i></span>
+                                <span class="estrela" data-valor="3"><i class="bi bi-star-fill"></i></span>
+                                <span class="estrela" data-valor="4"><i class="bi bi-star-fill"></i></span>
+                                <span class="estrela" data-valor="5"><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <input type="hidden" id="avaliacao-estrelas" required>
+                            <small class="text-muted d-block mt-2">Clique nas estrelas para avaliar</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Comentário (Opcional):</label>
+                            <textarea class="form-control" id="avaliacao-comentario" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Registrar Avaliação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Mudar senha-->
+    <div class="modal fade" tabindex="-1" id="modal-mudar-senha">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="bi bi-shield-lock"></i> Alterar Senha</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <form id="form-mudar-senha">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Senha Atual</label>
+                            <input type="password" class="form-control" id="senha-atual" required
+                                autocomplete="current-password">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nova Senha</label>
+                            <input type="password" class="form-control" id="senha-nova" required minlength="6"
+                                autocomplete="new-password">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirmar Nova Senha</label>
+                            <input type="password" class="form-control" id="senha-confirmar" required minlength="6"
+                                autocomplete="new-password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Salvar Nova Senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Cupons de desconto por EcoPontos acumulados-->
+    <div class="modal fade" tabindex="-1" id="modal-cupons">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title"><i class="bi bi-ticket-perforated"></i> Meus Cupons de Desconto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <strong><i class="bi bi-leaf"></i> Sistema de Recompensas EcoCity</strong><br>
+                        Acumule Eco Pontos e troque por cupons de desconto!
+                    </div>
+
+                    <h6 class="mb-3">Seus Pontos: <span id="display-pontos-usuario" class="badge bg-success">0 🌿</span>
+                    </h6>
+
+                    <h6 class="text-success mb-3">Cupons Disponíveis para Resgate:</h6>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h5 class="text-success">5% OFF</h5>
+                                    <p class="mb-2">500 Eco Pontos</p>
+                                    <button class="btn btn-success btn-sm btn-resgatar-cupom" type="button"
+                                        data-pontos="500" data-desconto="5">Resgatar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h5 class="text-success">10% OFF</h5>
+                                    <p class="mb-2">1000 Eco Pontos</p>
+                                    <button class="btn btn-success btn-sm btn-resgatar-cupom" type="button"
+                                        data-pontos="1000" data-desconto="10">Resgatar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h5 class="text-success">R$ 10,00</h5>
+                                    <p class="mb-2">800 Eco Pontos</p>
+                                    <button class="btn btn-success btn-sm btn-resgatar-cupom" type="button"
+                                        data-pontos="800" data-valor="10">Resgatar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h5 class="text-success">R$ 25,00</h5>
+                                    <p class="mb-2">1500 Eco Pontos</p>
+                                    <button class="btn btn-success btn-sm btn-resgatar-cupom" type="button"
+                                        data-pontos="1500" data-valor="25">Resgatar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h6 class="text-success mb-3">Meus Cupons Ativos:</h6>
+                    <ul id="lista-cupons-usuario" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Recuperação de senha-->
+    <div class="modal fade" tabindex="-1" id="modal-esqueci-senha">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="bi bi-key-fill"></i> Recuperar Senha</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Digite seu email cadastrado para receber instruções de recuperação:</p>
+                    <input type="email" class="form-control" id="email-recuperacao" placeholder="seu@email.com">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" type="button" id="btn-enviar-recuperacao">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Cookies-->
+    <div class="modal fade" tabindex="-1" id="modal-info-cookies">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title"><i class="bi bi-file-earmark-text"></i> O que são Cookies?</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="text-success">Entenda o uso de Cookies no EcoCity</h6>
+                    <p>Cookies são pequenos arquivos de texto armazenados no seu navegador quando você visita nosso
+                        site. Eles nos ajudam a:</p>
+                    <ul>
+                        <li><strong>Manter você conectado:</strong> Para que não precise fazer login toda vez</li>
+                        <li><strong>Lembrar suas preferências:</strong> Como filtros de busca e configurações</li>
+                        <li><strong>Melhorar sua experiência:</strong> Oferecendo conteúdo relevante</li>
+                        <li><strong>Armazenar favoritos:</strong> Para acesso rápido aos seus itens salvos</li>
+                        <li><strong>Proteger sua conta:</strong> Garantindo a segurança das suas informações</li>
+                    </ul>
+
+                    <h6 class="text-success mt-4">Tipos de Cookies que Usamos:</h6>
+                    <p><strong><i class="bi bi-shield-lock"></i> Essenciais:</strong> Necessários para o funcionamento
+                        básico</p>
+                    <p><strong><i class="bi bi-bar-chart-fill"></i> Funcionais:</strong> Armazenam suas preferências</p>
+                    <p><strong><i class="bi bi-leaf"></i> Ambientais:</strong> Rastreiam seu impacto ecológico positivo
+                    </p>
+
+                    <div class="alert alert-success mt-4">
+                        <strong>Compromisso EcoCity:</strong><br>
+                        Valorizamos sua privacidade e usamos cookies apenas para melhorar sua experiência sustentável.
+                        Nunca compartilhamos seus dados com terceiros.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Banner Cookies-->
+    <div id="cookie-banner" class="banner-cookies" style="display:none;">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                <div class="flex-grow-1 me-3">
+                    <h6 class="mb-1"><i class="bi bi-file-earmark-text"></i> 🍪 Nós usamos cookies</h6>
+                    <p class="mb-0 small">Para melhorar sua experiência. <a href="#" id="info-cookies-btn"
+                            class="text-white fw-bold">Saiba mais</a></p>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-light btn-sm" type="button" id="aceitar-cookies-btn">Aceitar</button>
+                    <button class="btn btn-outline-light btn-sm" type="button" id="recusar-cookies-btn">Recusar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Rodapé-->
+    <footer class="footer bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-success">EcoCity</h5>
+                    <p class="small">Transformando desapego em sustentabilidade. Cada troca aqui representa menos
+                        desperdício, mais consciência ambiental e um futuro verde para todos. Junte-se ao movimento de
+                        economia circular!</p>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <h6>Links Rápidos</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-white-50" data-bs-toggle="modal" data-bs-target="#modalSobre">Sobre
+                                Nós</a></li>
+                        <li><a href="#" class="text-white-50" data-bs-toggle="modal"
+                                data-bs-target="#modalComoFunciona">Como Funciona</a></li>
+                        <li><a href="#" class="text-white-50" data-bs-toggle="modal"
+                                data-bs-target="#modalTermos">Termos de Uso</a></li>
+                        <li><a href="#" class="text-white-50" data-bs-toggle="modal"
+                                data-bs-target="#modalPrivacidade">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <h6>Impacto Ecológico</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-white-50" data-bs-toggle="modal" data-bs-target="#modalDicas">Dicas
+                                Sustentáveis</a></li>
+                        <li><a href="#" class="text-white-50" data-bs-toggle="modal"
+                                data-bs-target="#modalParceiros">Parceiros Verdes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <div class="text-center">
+                <p class="small mb-0">Desenvolvido com 💚 para um futuro mais limpo e sustentável.</p>
+                <p class="small mb-0">© 2025 EcoCity. Todos os direitos reservados.</p>
+                <p class="mt-2">
+                    <a href="#" class="text-white-50 small me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalFAQ">FAQ</a>
+                    <a href="#" class="text-white-50 small me-3" data-bs-toggle="modal"
+                        data-bs-target="#modalSuporte">Suporte</a>
+                    <a href="#" class="text-white-50 small" data-bs-toggle="modal"
+                        data-bs-target="#modalContato">Contato</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modais das opções do rodapé-->
+    <div class="modal fade" id="modalSobre" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-success bg-opacity-10 text-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success">Sobre Nós</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>O <strong>EcoCity</strong> é uma iniciativa voltada para transformar a forma como consumimos e
+                        interagimos com o meio ambiente. Acreditamos que pequenas atitudes podem gerar grandes mudanças,
+                        e que cada produto reutilizado é um respiro a mais para o planeta.</p>
+                    <p>Nossa plataforma conecta pessoas que desejam dar um novo propósito a objetos que ainda têm valor.
+                        Promovemos a <strong>economia circular</strong>, reduzindo o desperdício e incentivando práticas
+                        de troca, doação e reaproveitamento.</p>
+                    <p>Mais do que um site, somos um movimento. Cada troca feita aqui representa menos resíduos, menos
+                        poluição e mais consciência ecológica. Junte-se a nós e ajude a construir um futuro mais verde,
+                        justo e sustentável.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalComoFunciona" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-success bg-opacity-10 text-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success">Como Funciona?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Usar o EcoCity é simples e ecológico!</p>
+                    <ol>
+                        <li><strong>Cadastre-se gratuitamente</strong> e crie seu perfil sustentável.</li>
+                        <li><strong>Publique seus itens:</strong> o que você não usa mais pode ser útil para outra
+                            pessoa.</li>
+                        <li><strong>Encontre o que precisa:</strong> troque, doe ou negocie de forma consciente.</li>
+                        <li><strong>Ganhe Eco Pontos:</strong> use transporte e embalagens sustentáveis para acumular
+                            pontos para trocar por cupons!</li>
+                    </ol>
+                    <p>Cada ação no EcoCity contribui para a <strong>redução do consumo excessivo</strong> e para a
+                        preservação dos recursos naturais. Ao reutilizar produtos, você diminui a produção de lixo e o
+                        impacto ambiental da indústria.</p>
+                    <p><em>Transforme o desapego em um ato de amor pelo nosso planeta: cada pequena ação é uma grande
+                            contribuição.</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalTermos" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-success bg-opacity-10 text-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success">Termos de Uso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Ao utilizar o EcoCity, o usuário concorda em agir de forma <strong>ética, ecológica e
+                            colaborativa</strong>. Nosso propósito é criar um ambiente saudável para trocas sustentáveis
+                        e conscientes.</p>
+                    <p>É proibido publicar conteúdos ofensivos, ilegais ou que violem direitos autorais. O foco é
+                        promover a reutilização e o consumo responsável: cada item deve ser anunciado de boa-fé e
+                        negociação econômica deve ser simbólica.</p>
+                    <p>Nos reservamos o direito de remover conteúdos ou contas que contrariem o espírito sustentável da
+                        plataforma.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalPrivacidade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-success bg-opacity-10 text-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success">Política de Privacidade</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>O EcoCity valoriza sua privacidade e protege suas informações com transparência e
+                        responsabilidade. Utilizamos seus dados apenas para garantir uma experiência segura e
+                        personalizada dentro da plataforma.</p>
+                    <p>Não compartilhamos informações com terceiros para fins comerciais. Nosso compromisso é com você —
+                        e com o planeta.</p>
+                    <p><em>Respeitar o usuário é também respeitar o meio ambiente digital.</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalFAQ" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-success bg-opacity-10 text-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success">FAQ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="text-success">Sobre o EcoCity</h6>
+                    <p class="mb-0"><strong>P: O uso do EcoCity é gratuito?</strong><br>
+                        R: Sim! Nossa missão é ajudar a promover o pensamento e ações que visam a sustentabilidade.</p>
+
+                    <p class="mb-0"><strong>P: Que tipos de itens posso anunciar?</strong><br>
+                        R: Tudo que possa ser reutilizado: móveis, eletrônicos, roupas, livros, utensílios, plantas,
+                        materiais de construção e muito mais!</p>
+
+                    <p class="mb-0"><strong>P: Como funcionam os Eco Pontos?</strong><br>
+                        R: Você ganha pontos ao completar transações, especialmente usando transporte sustentável.
+                        Acumule e troque por cupons de desconto! (veja seus pontos e cupons no "Perfil")</p>
+
+                    <h6 class="text-success mt-2">Sobre Transações</h6>
+                    <p class="mb-0"><strong>P: Como faço para negociar?</strong><br>
+                        R: Dê seu lance no item desejado. O anunciante avalia todos os tipos de ofertas e escolhe a
+                        melhor quando o prazo acabar.</p>
+
+                    <p class="mb-0"><strong>P: E se não houver acordo?</strong><br>
+                        R: O anunciante pode marcar como "Sem Acordo". Todos que enviaram lances serão notificados e o
+                        item pode ser removido ou republicado.</p>
+
+                    <p class="mb-0"><strong>P: Como funciona o sistema de avaliações?</strong><br>
+                        R: Após cada transação, comprador e vendedor avaliam um ao outro com estrelas (1-5).</p>
+
+                    <h6 class="text-success mt-2">Impacto Ambiental</h6>
+                    <p class="mb-0"><strong>P: Como o EcoCity ajuda o planeta?</strong><br>
+                        R: Cada item reutilizado evita: fabricação de novo produto, extração de recursos, emissão de
+                        carbono e lixo em aterros! São pequenos atos que somados fazem a diferença!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalSuporte" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content bg-success bg-opacity-10 text-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success">Suporte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Encontrou algum problema? Quer sugerir melhorias? Nossa equipe está pronta para ajudar!</p>
+                    <p>Envie um e-mail para <strong>suporte@ecocity.eco</strong> e contribua para tornar nossa
+                        comunidade ainda mais sustentável.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalContato" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content bg-success bg-opacity-10 text-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success">Contato</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Quer conversar conosco? Envie um e-mail para <strong>contato@ecocity.eco</strong> ou ligue para
+                        <strong>(21) 99999-8765</strong> e participe dessa corrente do bem.
+                    </p>
+                    <p>Você também pode nos encontrar nas redes sociais: <strong>@EcoCity</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalDicas" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-success bg-opacity-10 text-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success"><i class="bi bi-lightbulb-fill"></i> Dicas Sustentáveis</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong><i class="bi bi-bicycle"></i> Use transporte ecológico:</strong> Retire itens de
+                        transporte público, carona
+                        solidária, bicicleta ou a pé. Ganhe Eco Pontos e reduza emissões!</p>
+                    <p><strong>📦 Reutilize embalagens:</strong> Use caixas e sacolas que já tem em casa</p>
+                    <p><strong><i class="bi bi-arrow-repeat"></i> Pense em economia circular:</strong> Antes de comprar
+                        novo, pergunte: "Alguém está
+                        doando isso no EcoCity?" e "Eu realmente preciso disso?"</p>
+                    <p><strong>Seja a mudança. Use o EcoCity! <i class="bi bi-leaf"></i></strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalParceiros" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-success bg-opacity-10 text-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success">Parceiros Verdes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>O EcoCity faz parte de uma rede crescente de iniciativas ambientais. Trabalhamos ao lado de:</p>
+                    <ul>
+                        <li><i class="bi bi-building"></i> Cooperativas de reciclagem locais</li>
+                        <li><i class="bi bi-tree-fill"></i> ONGs de reflorestamento</li>
+                        <li><i class="bi bi-bicycle"></i> Coletivos de mobilidade sustentável</li>
+                        <li><i class="bi bi-book-fill"></i> Bibliotecas comunitárias</li>
+                        <li><i class="bi bi-tools"></i> Oficinas de conserto e reparo</li>
+                    </ul>
+                    <p><strong>Juntos criamos um ecossistema de sustentabilidade! <i class="bi bi-leaf"></i></strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
